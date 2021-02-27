@@ -1,4 +1,4 @@
-E-Monep
+Yii2 Adminlte3
 ============================
 
 [![Yii2](https://img.shields.io/badge/Powered_by-Yii_Framework-green.svg?style=flat)](http://www.yiiframework.com/)
@@ -23,7 +23,7 @@ DIRECTORY STRUCTURE
 REQUIREMENTS
 ------------
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+The minimum requirement by this project template that your Web server supports PHP 7.2.0.
 
 
 ** This Section is under development, check again soon
