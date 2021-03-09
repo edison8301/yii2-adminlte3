@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="login-logo" style="margin-bottom: 30px">
         <?= Html::img(Yii::$app->request->baseUrl . '/images/logo-login.png', ['style' => 'height:100px']) ?>
         <p style="color: white; font-size: 24px; margin: 5px 0">
-            <b>Sistem Informasi<br/>Himpunan Alumni Miftahul Huda<br/>(HAMIDA)</b>
+            <b>Sistem Informasi<br/>Database Perpustakaan<br/></b>
         </p>
     </div>
 
