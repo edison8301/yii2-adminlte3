@@ -17,6 +17,8 @@ use yii\helpers\Html;
         </li>
     </ul>
 
+    <h1>Database Perpustakaan</h1>
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->

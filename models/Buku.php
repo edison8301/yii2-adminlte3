@@ -62,4 +62,19 @@ class Buku extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getPenulis()
+    {
+       return $this->hasOne(Penulis::class, ['id' => 'id_penulis']);
+    }
+
+    public function getPenerbit()
+    {
+       return $this->hasOne(Penerbit::class, ['id' => 'id_penerbit']);
+    }
+
+    public function getKategori()
+    {
+       return $this->hasOne(Kategori::class, ['id' => 'id_kategori']);
+    }
 }

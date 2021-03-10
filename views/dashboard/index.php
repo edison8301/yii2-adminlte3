@@ -6,7 +6,7 @@ use yii\helpers\Url;
 
 
 
-$this->title = "Halaman Utama Database Perpustakaan";
+$this->title = "Halaman Utama";
 
 ?>
 

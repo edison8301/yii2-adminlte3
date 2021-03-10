@@ -4,5 +4,5 @@
 
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2020 <a href="#">Nama Pemilik</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2021 <a href="#">Database Perpustakaan</a>.</strong> All rights reserved.
 </footer>

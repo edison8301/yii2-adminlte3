@@ -15,29 +15,59 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- <h1><?= Html::encode($this->title) ?></h1> -->
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Buku', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="card card-default">
+        <div class="card-header">
+            <?= Html::a('Tambah Buku', ['create'], ['class' => 'btn btn-success']) ?>
+        </div>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+        <div class="card-body">
+            <?= GridView::widget
+                ([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
-            'nama',
-            'tahun_terbit',
-            'id_penulis',
-            'id_penerbit',
-            'id_kategori',
-            //'sinopsis:ntext',
-            //'sampul',
-            //'berkas',
-            //'created_at',
-            //'updated_at',
+                    // 'id',
+                    'nama',
+                    // 'tahun_terbit',
+                    [
+                        'label' => 'Penulis',
+                        'attribute' => 'id_penulis',
+                        'format' => 'raw',
+                        'value' => function($data) 
+                        {
+                            return @$data->penulis->nama;
+                        }
+                    ],
+                    [
+                        'label' => 'Penerbit',
+                        'attribute' => 'id_penerbit',
+                        'format' => 'raw',
+                        'value' => function($data) 
+                        {
+                            return @$data->penerbit->nama;
+                        }
+                    ],
+                    [
+                        'label' => 'Kategori',
+                        'attribute' => 'id_kategori',
+                        'format' => 'raw',
+                        'value' => function($data) 
+                        {
+                            return @$data->kategori->nama;
+                        }
+                    ],
+                    //'sinopsis:ntext',
+                    //'sampul',
+                    //'berkas',
+                    //'created_at',
+                    //'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                    ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]);     
+            ?>
+        </div>
+    </div>
 </div>
