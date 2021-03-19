@@ -39,7 +39,7 @@ class Buku extends \yii\db\ActiveRecord
             [['tahun_terbit', 'created_at', 'updated_at'], 'safe'],
             [['id_penulis', 'id_penerbit', 'id_kategori'], 'integer'],
             [['sinopsis'], 'string'],
-            [['nama', 'sampul', 'berkas'], 'string', 'max' => 255],
+            [['sampul', 'berkas'], 'string', 'max' => 255],
         ];
     }
 

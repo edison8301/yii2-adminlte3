@@ -53,4 +53,10 @@ class Penulis extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getCountBuku()
+    {
+        return $this->hasMany(Buku::className(),
+        ['id_penulis' => 'id'])->count();
+    }
 }

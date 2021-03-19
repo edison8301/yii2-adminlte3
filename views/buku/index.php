@@ -18,6 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card card-default">
         <div class="card-header">
             <?= Html::a('Tambah Buku', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Cetak PDF', ['pdf'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
+            <?= Html::a('Export Excel', ['excel'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
         </div>
 
         <div class="card-body">

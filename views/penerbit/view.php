@@ -18,8 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="card card-default">
         <div class="card-header">
+            <?= Html::a('Back', ['buku/index', 'id' => $model->id], ['class' => 'btn btn-warning']) 
+            ?>
             <?= Html::a('Update', ['update', 'id' => $model->id], 
-            ['class' => 'btn btn-primary']) 
+            ['class' => 'btn btn-success']) 
             ?>
             <?= Html::a('Delete', ['delete', 'id' => $model->id], 
                 [

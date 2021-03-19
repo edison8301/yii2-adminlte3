@@ -34,7 +34,9 @@
         "phpoffice/phpword": "^0.13.0",
         "kartik-v/yii2-widget-rating": "*",
         "phpoffice/phpspreadsheet": "^1.4",
-        "hail812/yii2-adminlte3": "^1.0"
+        "hail812/yii2-adminlte3": "^1.0",
+        "kartik-v/yii2-mpdf": "dev-master",
+        "hscstudio/yii2-export": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

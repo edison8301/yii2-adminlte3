@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card card-default">
         <div class="card-header">
         <?= Html::a('Tambah Penerbit', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Daftar Buku', ['buku/index'], ['class' => 'btn btn-primary']) ?>
         </div>
         <div class="card-body">
 
@@ -31,12 +32,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'id',
                     'nama',
                     'alamat:ntext',
-                    'telepon',
-                    'email:email',
+                    ['label' => 'Jumlah Buku','value' => function($data)
+                    {
+                        return $data -> getCountBuku();
+                    },
+                        'headerOptions' => ['style' => 'width: 150px; text-align: center'],
+                    ],
+                    // 'telepon',
+                    // 'email:email',
                     //'created_at',
                     //'updated_at',
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'contentOptions' => ['style' => 'width: 100px; text-align: center']
+                    ],
                 ],
                 ]); 
             ?>

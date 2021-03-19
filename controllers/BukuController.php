@@ -8,6 +8,7 @@ use app\models\BukuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\pdf;
 
 /**
  * BukuController implements the CRUD actions for Buku model.
@@ -124,4 +125,85 @@ class BukuController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionPdf() 
+    {
+    // get your HTML raw content without any layouts or scripts
+    $content = $this->renderPartial('exportPdf');
+    
+    // setup kartik\mpdf\Pdf component
+    $pdf = new Pdf([
+        // set to use core fonts only
+        'mode' => Pdf::MODE_CORE, 
+        // A4 paper format
+        'format' => Pdf::FORMAT_A4, 
+        // portrait orientation
+        'orientation' => Pdf::ORIENT_PORTRAIT, 
+        // stream to browser inline
+        'destination' => Pdf::DEST_BROWSER, 
+        // your html content input
+        'content' => $content,  
+        // format content from your own css file if needed or use the
+        // enhanced bootstrap css built by Krajee for mPDF formatting 
+        'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+        // any css to be embedded if required
+        'cssInline' => '.kv-heading-1{font-size:18px}', 
+         // set mPDF properties on the fly
+        'options' => ['title' => 'Krajee Report Title'],
+         // call mPDF methods on the fly
+        'methods' => [ 
+            'SetHeader'=>['Daftar Buku'], 
+            'SetFooter'=>['{PAGENO}'],
+        ]
+    ]); 
+    // return the pdf output as per the destination setting
+    return $pdf->render(); 
+    }
+
+    public function actionExcel()
+    {
+        $searchModel = new BukuSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        // Initalize the TBS instance
+        $OpenTBS = new \hscstudio\export\OpenTBS; // new instance of TBS
+        // Change with Your template kaka
+        $template = Yii::getAlias('@hscstudio/export').'/templates/opentbs/ms-excel.xlsx';
+        $OpenTBS->LoadTemplate($template); // Also merge some [onload] automatic fields (depends of the type of document).
+        $OpenTBS->VarRef['modelName']= "Buku";               
+        $data = [];
+        $no=1;
+        foreach($dataProvider->getModels() as $buku){
+            $data[] = [
+                'no'=>$no++,
+                'nama'=>$buku->nama,
+                'tahun_terbit'=>$buku->tahun_terbit,
+                'id_penulis' =>$buku->id_penulis,
+                'id_penerbit' =>$buku->id_penerbit,
+                'id_kategori' =>$buku->id_kategori,
+            ];
+        }
+        
+        $data2[0] = [
+                'no'=>'A',
+                'nama'=>'B',
+                'tahun_terbit'=>'C',
+                'id_penulis' => 'D',
+                'id_penerbit' => 'E',
+                'id_kategori' => 'F',
+            ];
+        $data2[1] = [
+                'no'=>'A',
+                'nama'=>'B',
+                'tahun_terbit'=>'C',
+                'id_penulis' => 'D',
+                'id_penerbit' => 'E',
+                'id_kategori' => 'F',
+            ];
+        $OpenTBS->MergeBlock('data', $data);
+        $OpenTBS->MergeBlock('data2', $data2);
+        // Output the result as a file on the server. You can change output file
+        $OpenTBS->Show(OPENTBS_DOWNLOAD, 'Buku.xlsx'); // Also merges all [onshow] automatic fields.          
+        exit;
+    } 
 }

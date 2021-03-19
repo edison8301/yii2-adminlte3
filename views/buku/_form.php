@@ -33,6 +33,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'updated_at')->textInput() ?> -->
 
     <div class="form-group">
+        <?= Html::a('Cancel', ['buku/index'], ['class' => 'btn btn-danger']) ?>
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
