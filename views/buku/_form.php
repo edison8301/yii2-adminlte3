@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Buku */
@@ -12,19 +14,28 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'nama')->textInput(['maxlength' => true, 'placeholder' => 'masukkan nama']) ?>
 
-    <?= $form->field($model, 'tahun_terbit')->textInput(['maxlength' => true]) ?>
+    <!-- <?= $form->field($model, 'tahun_terbit')->textInput(['maxlength' => true]) ?> -->
+    <?= $form->field($model, 'tahun_terbit')->widget(DatePicker::className(), [
+            'removeButton' => false,
+            'options' => ['placeholder' => 'pilih tahun terbit'],
+            'pluginOptions' => [
+                'minViewMode'=>2,
+                'autoclose'=>true,
+                'format' => 'yyyy'
+            ]
+    ]) ?>
 
-    <?= $form->field($model, 'id_penulis')->textInput() ?>
+    <?= $form->field($model, 'id_penulis')->dropDownList($penulis,['prompt'=>'-pilih kategori-'])->label('Nama Penulis') ?>
 
-    <?= $form->field($model, 'id_penerbit')->textInput() ?>
+    <?= $form->field($model, 'id_penerbit')->dropDownList($penerbit,['prompt'=>'-pilih penerbit-'])->label('Nama Penerbit') ?>
 
-    <?= $form->field($model, 'id_kategori')->textInput() ?>
+    <?= $form->field($model, 'id_kategori')->dropDownList($kategori,['prompt'=>'-pilih kategori-'])->label('Nama Kategori') ?>
 
-    <?= $form->field($model, 'sinopsis')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'sinopsis')->textArea(['rows' => '3']) ?>
 
-    <?= $form->field($model, 'sampul')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'sampul')->fileInput() ?>
 
     <?= $form->field($model, 'berkas')->textInput(['maxlength' => true]) ?>
 

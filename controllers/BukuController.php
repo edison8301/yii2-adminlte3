@@ -9,6 +9,11 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use kartik\mpdf\pdf;
+use app\models\Penulis;
+use app\models\Penerbit;
+use app\models\Kategori;
+use yii\helpers\ArrayHelper;
+use yii\web\UploadedFile;
 
 /**
  * BukuController implements the CRUD actions for Buku model.
@@ -67,13 +72,37 @@ class BukuController extends Controller
     {
         $model = new Buku();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        // dropdown list Array
+        $penulis = Penulis::find()->all();
+        $penulis = ArrayHelper::map($penulis,'id','nama');
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        $penerbit = Penerbit::find()->all();
+        $penerbit = ArrayHelper::map($penerbit,'id','nama');
+
+        $kategori = Kategori::find()->all();
+        $kategori = ArrayHelper::map($kategori,'id','nama');
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) 
+        {
+           //untuk upload
+           $model->file = UploadedFile::getInstance($model, 'sampul');
+
+           $namaFoto = time().'_'.$model->file->name;
+
+           $model->file->saveAs('../web/images/uploads/'. $namaFoto);
+
+           //simpan ke DB
+           $model->sampul = $namaFoto;
+           $model->save();
+           return $this->redirect(['view', 'id' => $model->id]);
+       }else{
+            return $this->render('create', [
+           'model' => $model,
+           'penulis' => $penulis,
+           'penerbit' => $penerbit,
+           'kategori' => $kategori,
+       ]);
+       }
     }
 
     /**
@@ -87,12 +116,24 @@ class BukuController extends Controller
     {
         $model = $this->findModel($id);
 
+        $penulis = Penulis::find()->all();
+        $penulis = ArrayHelper::map($penulis,'id','nama');
+
+        $penerbit = Penerbit::find()->all();
+        $penerbit = ArrayHelper::map($penerbit,'id','nama');
+
+        $kategori = Kategori::find()->all();
+        $kategori = ArrayHelper::map($kategori,'id','nama');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'penulis' => $penulis,
+            'penerbit' => $penerbit,
+            'kategori' => $kategori
         ]);
     }
 
@@ -106,7 +147,9 @@ class BukuController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        $model->file->delete('../web/images/uploads/'. $namaFoto);
 
+        $model->delete();
         return $this->redirect(['index']);
     }
 
@@ -178,9 +221,9 @@ class BukuController extends Controller
                 'no'=>$no++,
                 'nama'=>$buku->nama,
                 'tahun_terbit'=>$buku->tahun_terbit,
-                'id_penulis' =>$buku->id_penulis,
-                'id_penerbit' =>$buku->id_penerbit,
-                'id_kategori' =>$buku->id_kategori,
+                'id_penulis' =>$buku->penulis->nama,
+                'id_penerbit' =>$buku->penerbit->nama,
+                'id_kategori' =>$buku->kategori->nama,
             ];
         }
         

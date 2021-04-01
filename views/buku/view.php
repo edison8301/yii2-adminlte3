@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'tahun_terbit',
                     [
                         'attribute' => 'id_penulis',
+                        'label' => 'Nama Penulis',
                         'format' => 'raw',
                         'value' => function($data) 
                         {
@@ -51,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'id_penerbit',
+                        'label' => 'Nama Penerbit',
                         'format' => 'raw',
                         'value' => function($data) 
                         {
@@ -59,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'id_kategori',
+                        'label' => 'Jenis Kategori',
                         'format' => 'raw',
                         'value' => function($data) 
                         {
@@ -66,7 +69,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     'sinopsis:ntext',
-                    'sampul',
+                    [
+                       'attribute' => 'sampul',
+                       'class' => 'yii\grid\DataColumn',
+                       'format' => 'raw',
+                       'value' => function($data)
+                        {
+                           $path = Yii::getAlias('@web'). '/images/uploads/' . $data->sampul;
+                           return "<img width='104px' src='$path'>";
+                        }
+                    ],
                     'berkas',
                     // 'created_at',
                     // 'updated_at',

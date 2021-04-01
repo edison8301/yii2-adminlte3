@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Html;
+
 
 /**
  * This is the model class for table "buku".
@@ -24,6 +26,7 @@ class Buku extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $file;
     public static function tableName()
     {
         return 'buku';
@@ -39,7 +42,8 @@ class Buku extends \yii\db\ActiveRecord
             [['tahun_terbit', 'created_at', 'updated_at'], 'safe'],
             [['id_penulis', 'id_penerbit', 'id_kategori'], 'integer'],
             [['sinopsis'], 'string'],
-            [['sampul', 'berkas'], 'string', 'max' => 255],
+            [['sampul'], 'file', 'extensions' => 'png, jpg, jpeg'],
+            [['nama','berkas'], 'string', 'max' => 250],
         ];
     }
 
