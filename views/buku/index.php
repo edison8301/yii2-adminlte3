@@ -31,7 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'yii\grid\SerialColumn'],
 
                     // 'id',
-                    'nama',
+                    // 'nama',
+                    [
+                        'label' => 'Judul Buku',
+                        'attribute' => 'nama',
+                        'format' => 'raw',
+                    ],
                     // 'tahun_terbit',
                     [
                         'label' => 'Penulis',

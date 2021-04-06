@@ -7,29 +7,101 @@
  */
 
 use miloschuman\highcharts\Highcharts;
+use app\models\Buku;    
+use app\models\Kategori;
+use app\models\Penerbit;
+use app\models\Penulis;
+use app\models\User;
 
 ?>
 
 <div class="card card-default">
-    <div class="card-header with-border">
+    <div class="card-header">
         <h3 class="card-title">Grafik</h3>
     </div>
     <div class="card-body">
+        <div class="row">
 
-        <?php echo Highcharts::widget([
-            'options' => [
-                'title' => ['text' => 'Fruit Consumption'],
-                'xAxis' => [
-                    'categories' => ['Apples', 'Bananas', 'Oranges']
+            <?=Highcharts::widget([
+                'options' => [
+                    'credits' => false,
+                    'title' => ['text' => 'Penulis Buku'],
+                    'exporting' => ['enabled' => true],
+                    'xAxis' => [
+                        'categories' => Penulis::getNama(),
+                    ],
+                    'yAxis' => [
+                        'title' => ['text' => 'jumlah buku'],
+                    ],
+                    'plotOptions' => [
+                        'pie' => [
+                            'cursor' => 'pointer',
+                        ],
+                    ],
+                    'series' => [
+                        [
+                            'type' => 'column',
+                            'name' => 'Buku',
+                            'data' => Penulis::getGrafikList(),
+                            'color' =>'purple'   
+                        ],
+                    ],
                 ],
-                'yAxis' => [
-                    'title' => ['text' => 'Fruit eaten']
+            ]);?>
+
+            <?=Highcharts::widget([
+                'options' => [
+                    'credits' => false,
+                    'title' => ['text' => 'Penerbit Buku'],
+                    'exporting' => ['enabled' => true],
+                    'xAxis' => [
+                        'categories' => Penerbit::getNama(),
+                    ],
+                    'yAxis' => [
+                        'title' => ['text' => 'jumlah buku'],
+                    ],
+                    'plotOptions' => [
+                        'pie' => [
+                            'cursor' => 'pointer',
+                        ],
+                    ],
+                    'series' => [
+                        [
+                            'type' => 'column',
+                            'name' => 'Buku',
+                            'data' => Penerbit::getGrafikList(),
+                            'color' =>'green'   
+                        ],
+                    ],
                 ],
-                'series' => [
-                    ['name' => 'Jane', 'data' => [1, 0, 4]],
-                    ['name' => 'John', 'data' => [5, 7, 3]]
-                ]
-            ]
-        ]); ?>
+            ]);?>
+
+            <?=Highcharts::widget([
+                'options' => [
+                    'credits' => false,
+                    'title' => ['text' => 'Kategori Buku'],
+                    'exporting' => ['enabled' => true],
+                    'xAxis' => [
+                        'categories' => Kategori::getNama(),
+                    ],
+                    'yAxis' => [
+                        'title' => ['text' => 'jumlah buku'],
+                    ],
+                    'plotOptions' => [
+                        'pie' => [
+                            'cursor' => 'pointer',
+                        ],
+                    ],
+                    'series' => [
+                        [
+                            'type' => 'column',
+                            'name' => 'Buku',
+                            'data' => Kategori::getGrafikList(),
+                            'color' =>'red'   
+                        ],
+                    ],
+                ],
+            ]);?>   
+        </div>
     </div>
 </div>

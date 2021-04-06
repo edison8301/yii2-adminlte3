@@ -13,12 +13,7 @@ $this->title = "Halaman Utama";
 <?= $this->render('_card-rekap'); ?>
 
 
-<div class="row">
-	<div class="col-sm-6">
-		<?= $this->render('_card-grafik'); ?>
-	</div>
-    <div class="col-sm-6">
-        <?= $this->render('_card-grafik'); ?>
-    </div>
-</div>
+<?= $this->render('_card-grafik'); ?>
+
+
 

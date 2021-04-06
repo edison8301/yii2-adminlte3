@@ -52,4 +52,32 @@ class Kategori extends \yii\db\ActiveRecord
         return $this->hasMany(Buku::className(),
         ['id_kategori' => 'id'])->count();
     }
+
+    public function getCount()
+    {
+        return static::find()->count();
+    }
+
+    public function getManyKategori()
+    {
+        return $this->hasMany(Buku::class, ['id_kategori' => 'id']);
+    }
+
+    public static function getGrafikList()
+    {
+        $data = [];
+        foreach (static::find()->all() as $kategori) {
+            $data[] = [($kategori->nama), (int) $kategori->getManyKategori()->count()];
+        }
+        return $data;
+    }
+    
+    public static function getNama()
+    {
+        $data = [];
+        foreach (static::find()->all() as $kategori) {
+            $data[] = [$kategori->nama];
+        }
+        return $data;
+    }
 }

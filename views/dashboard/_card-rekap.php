@@ -1,5 +1,11 @@
 <?php
 
+use yii\helpers\Url;
+use app\models\Buku;
+use app\models\Penulis;
+use app\models\Penerbit;
+use app\models\Kategori;
+
 ?>
 
 
@@ -15,14 +21,17 @@
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
-                        <p>Menunggu Diproses</p>
+                        <p>Jumlah Buku</p>
 
-                        <h3>8</h3>
+                        <h3>
+                            <?= Yii::$app->formatter->asInteger(Buku::getCount()); ?>
+                        </h3>
                     </div>
                     <div class="icon">
                         <i class="fa fa-refresh"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?=Url::to(['buku/index']);?>"class="small-box-footer">Detail 
+                        <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -31,14 +40,17 @@
                 <!-- small box -->
                 <div class="small-box bg-purple">
                     <div class="inner">
-                        <p>Dalam Proses</p>
+                        <p>Jumlah Penulis</p>
 
-                        <h3>8</h3>
+                        <h3>
+                            <?= Yii::$app->formatter->asInteger(Penulis::getCount()); ?>
+                        </h3>
                     </div>
                     <div class="icon">
                         <i class="fa fa-clock-o"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?=Url::to(['penulis/index']);?>"class="small-box-footer">Detail 
+                        <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -46,14 +58,17 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <p>Pelayanan Selesai</p>
+                        <p>Jumlah Penerbit</p>
 
-                        <h3>8</h3>
+                        <h3>
+                            <?= Yii::$app->formatter->asInteger(Penerbit::getCount()); ?>
+                        </h3>
                     </div>
                     <div class="icon">
                         <i class="fa fa-check-square-o"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?=Url::to(['penerbit/index']);?>"class="small-box-footer">Detail 
+                        <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
 
@@ -62,14 +77,17 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <p>Pelayanan Ditolak</p>
+                        <p>Jumlah Kategori</p>
 
-                        <h3>8</h3>
+                        <h3>
+                            <?= Yii::$app->formatter->asInteger(Kategori::getCount()); ?>
+                        </h3>
                     </div>
                     <div class="icon">
                         <i class="fa fa-remove"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?=Url::to(['kategori/index']);?>"class="small-box-footer">Detail 
+                        <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>

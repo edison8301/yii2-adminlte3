@@ -81,4 +81,9 @@ class Buku extends \yii\db\ActiveRecord
     {
        return $this->hasOne(Kategori::class, ['id' => 'id_kategori']);
     }
+
+    public function getCount()
+    {
+        return static::find()->count();
+    }
 }

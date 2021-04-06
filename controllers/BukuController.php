@@ -147,7 +147,7 @@ class BukuController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        $model->file->delete('../web/images/uploads/'. $namaFoto);
+        unlink(Yii::$app()->basePath.'/../web/images/uploads/'. $oldfile);
 
         $model->delete();
         return $this->redirect(['index']);

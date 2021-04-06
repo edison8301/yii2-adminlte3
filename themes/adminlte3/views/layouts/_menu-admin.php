@@ -17,6 +17,8 @@ use hail812\adminlte3\widgets\Menu;
         ['label' => 'Daftar Penulis', 'icon' => 'pen', 'url' => ['/penulis/index']],
         ['label' => 'Daftar Penerbit', 'icon' => 'briefcase', 'url' => ['/penerbit/index']],
         ['label' => 'Daftar Kategori', 'icon' => 'folder-open', 'url' => ['/kategori/index']],
+        ['label' => 'Daftar Anggota', 'icon' => 'address-book', 'url' => ['/anggota/index']],
+        ['label' => 'Daftar Peminjaman', 'icon' => 'list-alt', 'url' => ['/peminjaman/index']],
         ['label' => 'User', 'icon' => 'user', 'items' => [
             ['label' => 'Admin', 'iconStyle'=>'far', 'icon' => 'circle', 'url' => ['/user/index', 'id_user_role' => UserRole::ADMIN]],
         ]],
