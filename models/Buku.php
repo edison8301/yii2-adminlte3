@@ -42,8 +42,9 @@ class Buku extends \yii\db\ActiveRecord
             [['tahun_terbit', 'created_at', 'updated_at'], 'safe'],
             [['id_penulis', 'id_penerbit', 'id_kategori'], 'integer'],
             [['sinopsis'], 'string'],
+            [['nama', 'sampul', 'berkas'], 'string', 'max' => 255],
             [['sampul'], 'file', 'extensions' => 'png, jpg, jpeg'],
-            [['nama','berkas'], 'string', 'max' => 250],
+            [['berkas'], 'file', 'extensions' => 'doc, docx, pdf'],
         ];
     }
 
@@ -85,5 +86,34 @@ class Buku extends \yii\db\ActiveRecord
     public function getCount()
     {
         return static::find()->count();
+    }
+
+    public function getImageKecilSampul()
+    {
+        if ($this->sampul != '') {
+            return Html::img('@web/images/upload/sampul/' . $this->sampul, [
+                'class' => 'img-responsive', 
+                'style' => 'height:100px'
+            ]);
+        } 
+        
+        return Html::img('@web/images/upload/no-images.png', [
+            'class' => 'img-responsive', 
+            'style' => 'height:100px'
+        ]);       
+    }
+
+     public function getLinkIconBerkas()
+    {
+        if ($this->berkas != '') {
+            $url = Yii::getAlias('@web') . '/images/upload/berkas/' . $this->berkas;
+            return Html::a('<i class="glyphicon glyphicon-download-alt"></i>',$url,[
+                'data-toggle'=>'tooltip',
+                'title'=>'Unduh Berkas'
+            ]);
+        } 
+        
+        return '<i class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Berkas Tidak Tersedia"></i>';
+        
     }
 }

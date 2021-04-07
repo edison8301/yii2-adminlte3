@@ -5,10 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\Buku;
 use app\models\BukuSearch;
+use app\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use kartik\mpdf\pdf;
+use kartik\mpdf\Pdf;
 use app\models\Penulis;
 use app\models\Penerbit;
 use app\models\Kategori;
@@ -84,25 +85,25 @@ class BukuController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) 
         {
-           //untuk upload
-           $model->file = UploadedFile::getInstance($model, 'sampul');
-
-           $namaFoto = time().'_'.$model->file->name;
-
-           $model->file->saveAs('../web/images/uploads/'. $namaFoto);
-
-           //simpan ke DB
-           $model->sampul = $namaFoto;
-           $model->save();
+            $sampul = UploadedFile::getInstance($model, 'sampul');
+            $berkas = UploadedFile::getInstance($model, 'berkas');
+            // merubah nama filenya.
+            $model->sampul = time() . '_' . $sampul->name;
+            $model->berkas = time() . '_' . $berkas->name;
+            // save data ke databases.
+            $model->save(false);
+            // lokasi simpan file.
+            $sampul->saveAs(Yii::$app->basePath . '/web/images/upload/sampul/' . $model->sampul);
+            $berkas->saveAs(Yii::$app->basePath . '/web/images/upload/berkas/' . $model->berkas);
+            // Menuju ke view id yang data dibuat.
            return $this->redirect(['view', 'id' => $model->id]);
-       }else{
+        }
             return $this->render('create', [
            'model' => $model,
            'penulis' => $penulis,
            'penerbit' => $penerbit,
            'kategori' => $kategori,
        ]);
-       }
     }
 
     /**
@@ -125,7 +126,30 @@ class BukuController extends Controller
         $kategori = Kategori::find()->all();
         $kategori = ArrayHelper::map($kategori,'id','nama');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $sampul_lama = $model->sampul;
+        $berkas_lama = $model->berkas;
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) 
+        {
+            $sampul = UploadedFile::getInstance($model, 'sampul');
+            $berkas = UploadedFile::getInstance($model, 'berkas');
+            // Jika ada data file yang dirubah maka data lama akan di hapus dan di ganti dengan data baru yang sudah diambil jika tidak ada data yang dirubah maka file akan langsung save data-data yang lama.
+            if ($sampul !== null) {
+                $model->sampul = time() . '_' . $sampul->name;
+                $sampul->saveAs(Yii::$app->basePath . '/web/images/upload/sampul/' . $model->sampul);
+            } else {
+                $model->sampul = $sampul_lama;
+            }
+            if ($berkas !== null) {
+                $model->berkas = time() . '_' . $berkas->name;
+                $berkas->saveAs(Yii::$app->basePath . '/web/images/upload/berkas/' . $model->berkas);
+            } else {
+                $model->berkas = $berkas_lama;
+            }
+            // Simpan data ke databases
+            $model->save(false);
+            // Menuju ke view id yang data dibuat.
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -146,8 +170,10 @@ class BukuController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-        unlink(Yii::$app()->basePath.'/../web/images/uploads/'. $oldfile);
+        $model = $this->findModel($id);
+        
+        unlink(Yii::getAlias('@web') .  '/web/images/upload/sampul/' . $model->sampul);
+        unlink(Yii::getAlias('@web') .  '/web/images/upload/berkas/' . $model->berkas);
 
         $model->delete();
         return $this->redirect(['index']);

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Buku */
@@ -68,18 +69,27 @@ $this->params['breadcrumbs'][] = $this->title;
                             return @$data->kategori->nama;
                         }
                     ],
-                    'sinopsis:ntext',
                     [
-                       'attribute' => 'sampul',
-                       'class' => 'yii\grid\DataColumn',
-                       'format' => 'raw',
-                       'value' => function($data)
-                        {
-                           $path = Yii::getAlias('@web'). '/images/uploads/' . $data->sampul;
-                           return "<img width='104px' src='$path'>";
-                        }
+                        'attribute'=>'sinopsis',
+                        'format'=>'raw',
+                        'value'=>$model->sinopsis
                     ],
-                    'berkas',
+                    [
+                        'attribute' => 'sampul',
+                        'format' => 'raw',
+                        'value' => function ($model) {
+                            if ($model->sampul != '') {
+                            return Html::img('@web/images/upload/sampul/' . $model->sampul, ['class' => 'img-responsive', 'style' => 'height:200px']);
+                            } else { 
+                                return '<div align="center"><h1>Tidak Ada Sampul</h1></div>';
+                        }
+                    },
+                    ],
+                    [
+                        'attribute' => 'berkas',
+                        'format' => 'raw',
+                        'value' => $model->getLinkIconBerkas()
+                    ], 
                     // 'created_at',
                     // 'updated_at',
                     ],

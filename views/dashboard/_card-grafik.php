@@ -22,86 +22,92 @@ use app\models\User;
     <div class="card-body">
         <div class="row">
 
-            <?=Highcharts::widget([
-                'options' => [
-                    'credits' => false,
-                    'title' => ['text' => 'Penulis Buku'],
-                    'exporting' => ['enabled' => true],
-                    'xAxis' => [
-                        'categories' => Penulis::getNama(),
-                    ],
-                    'yAxis' => [
-                        'title' => ['text' => 'jumlah buku'],
-                    ],
-                    'plotOptions' => [
-                        'pie' => [
-                            'cursor' => 'pointer',
+            <div class="col-6 col-md-4">                
+                <?=Highcharts::widget([
+                    'options' => [
+                        'credits' => false,
+                        'title' => ['text' => 'Penulis Buku'],
+                        'exporting' => ['enabled' => true],
+                        'xAxis' => [
+                            'categories' => Penulis::getNama(),
+                        ],
+                        'yAxis' => [
+                            'title' => ['text' => 'jumlah buku'],
+                        ],
+                        'plotOptions' => [
+                            'pie' => [
+                                'cursor' => 'pointer',
+                            ],
+                        ],
+                        'series' => [
+                            [
+                                'type' => 'column',
+                                'name' => 'Buku',
+                                'data' => Penulis::getGrafikList(),
+                                'color' =>'purple'   
+                            ],
                         ],
                     ],
-                    'series' => [
-                        [
-                            'type' => 'column',
-                            'name' => 'Buku',
-                            'data' => Penulis::getGrafikList(),
-                            'color' =>'purple'   
-                        ],
-                    ],
-                ],
-            ]);?>
+                ]);?>
+            </div>
 
-            <?=Highcharts::widget([
-                'options' => [
-                    'credits' => false,
-                    'title' => ['text' => 'Penerbit Buku'],
-                    'exporting' => ['enabled' => true],
-                    'xAxis' => [
-                        'categories' => Penerbit::getNama(),
-                    ],
-                    'yAxis' => [
-                        'title' => ['text' => 'jumlah buku'],
-                    ],
-                    'plotOptions' => [
-                        'pie' => [
-                            'cursor' => 'pointer',
+            <div class="col-6 col-md-4">            
+                <?=Highcharts::widget([
+                    'options' => [
+                        'credits' => false,
+                        'title' => ['text' => 'Penerbit Buku'],
+                        'exporting' => ['enabled' => true],
+                        'xAxis' => [
+                            'categories' => Penerbit::getNama(),
+                        ],
+                        'yAxis' => [
+                            'title' => ['text' => 'jumlah buku'],
+                        ],
+                        'plotOptions' => [
+                            'pie' => [
+                                'cursor' => 'pointer',
+                            ],
+                        ],
+                        'series' => [
+                            [
+                                'type' => 'column',
+                                'name' => 'Buku',
+                                'data' => Penerbit::getGrafikList(),
+                                'color' =>'green'   
+                            ],
                         ],
                     ],
-                    'series' => [
-                        [
-                            'type' => 'column',
-                            'name' => 'Buku',
-                            'data' => Penerbit::getGrafikList(),
-                            'color' =>'green'   
-                        ],
-                    ],
-                ],
-            ]);?>
+                ]);?>
+            </div>
 
-            <?=Highcharts::widget([
-                'options' => [
-                    'credits' => false,
-                    'title' => ['text' => 'Kategori Buku'],
-                    'exporting' => ['enabled' => true],
-                    'xAxis' => [
-                        'categories' => Kategori::getNama(),
-                    ],
-                    'yAxis' => [
-                        'title' => ['text' => 'jumlah buku'],
-                    ],
-                    'plotOptions' => [
-                        'pie' => [
-                            'cursor' => 'pointer',
+            <div class="col-6 col-md-4">
+                <?=Highcharts::widget([
+                    'options' => [
+                        'credits' => false,
+                        'title' => ['text' => 'Kategori Buku'],
+                        'exporting' => ['enabled' => true],
+                        'xAxis' => [
+                            'categories' => Kategori::getNama(),
+                        ],
+                        'yAxis' => [
+                            'title' => ['text' => 'jumlah buku'],
+                        ],
+                        'plotOptions' => [
+                            'pie' => [
+                                'cursor' => 'pointer',
+                            ],
+                        ],
+                        'series' => [
+                            [
+                                'type' => 'column',
+                                'name' => 'Buku',
+                                'data' => Kategori::getGrafikList(),
+                                'color' =>'red'   
+                            ],
                         ],
                     ],
-                    'series' => [
-                        [
-                            'type' => 'column',
-                            'name' => 'Buku',
-                            'data' => Kategori::getGrafikList(),
-                            'color' =>'red'   
-                        ],
-                    ],
-                ],
-            ]);?>   
+                ]);?>
+            </div>   
         </div>
     </div>
 </div>
