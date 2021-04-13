@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\models\User;
+use app\models\UserRole;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
@@ -38,7 +40,7 @@ use app\models\User;
 
         <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
+        <!-- <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?> -->
 
         <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
         <?= Html::hiddenInput('referrer',$referrer); ?>

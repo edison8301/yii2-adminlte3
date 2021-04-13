@@ -107,13 +107,12 @@ class Buku extends \yii\db\ActiveRecord
     {
         if ($this->berkas != '') {
             $url = Yii::getAlias('@web') . '/images/upload/berkas/' . $this->berkas;
-            return Html::a('<i class="glyphicon glyphicon-download-alt"></i>',$url,[
+            return Html::a('<i class="fa fa-download"></i>',$url,[
                 'data-toggle'=>'tooltip',
                 'title'=>'Unduh Berkas'
             ]);
         } 
         
-        return '<i class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Berkas Tidak Tersedia"></i>';
-        
+        return '<i class="fa fa-remove" data-toggle="tooltip" title="Berkas Tidak Tersedia"></i>';   
     }
 }

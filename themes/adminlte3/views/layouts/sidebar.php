@@ -9,9 +9,9 @@ use hail812\adminlte3\widgets\Menu;
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?=\yii\helpers\Url::home()?>" class="brand-link">
-        <img src="<?= Yii::getAlias('@web'); ?>/images/buku.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             style="opacity: 1.0">
-        <span class="brand-text font-weight-light">Perpustakaan</span>
+        <!-- <img src="<?= Yii::getAlias('@web'); ?>/images/buku.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: 1.0"> -->
+        <span class="brand-text font-weight-light"><i class="fas fa-archway"></i> Selamat Datang</span>
     </a>
 
     <!-- Sidebar -->

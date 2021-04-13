@@ -28,7 +28,7 @@ use app\models\Kategori;
                         </h3>
                     </div>
                     <div class="icon">
-                        <i class="fa fa-refresh"></i>
+                        <i class="fa fa-book" aria-hidden="true"></i>
                     </div>
                     <a href="<?=Url::to(['buku/index']);?>"class="small-box-footer">Detail 
                         <i class="fa fa-arrow-circle-right"></i></a>
@@ -47,7 +47,7 @@ use app\models\Kategori;
                         </h3>
                     </div>
                     <div class="icon">
-                        <i class="fa fa-clock-o"></i>
+                        <i class="fa fa-pencil-alt" aria-hidden="true"></i>
                     </div>
                     <a href="<?=Url::to(['penulis/index']);?>"class="small-box-footer">Detail 
                         <i class="fa fa-arrow-circle-right"></i></a>
@@ -65,7 +65,7 @@ use app\models\Kategori;
                         </h3>
                     </div>
                     <div class="icon">
-                        <i class="fa fa-check-square-o"></i>
+                        <i class="fas fa-briefcase"></i>
                     </div>
                     <a href="<?=Url::to(['penerbit/index']);?>"class="small-box-footer">Detail 
                         <i class="fa fa-arrow-circle-right"></i></a>
@@ -84,7 +84,7 @@ use app\models\Kategori;
                         </h3>
                     </div>
                     <div class="icon">
-                        <i class="fa fa-remove"></i>
+                        <i class="fas fa-folder-open"></i>
                     </div>
                     <a href="<?=Url::to(['kategori/index']);?>"class="small-box-footer">Detail 
                         <i class="fa fa-arrow-circle-right"></i></a>

@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 
 
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header bg-primary navbar navbar-expand navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -17,7 +17,7 @@ use yii\helpers\Html;
         </li>
     </ul>
 
-    <h1>Database Perpustakaan</h1>
+    <h1 class="">Perpustakaan</h1>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">

@@ -171,11 +171,15 @@ class BukuController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        
-        unlink(Yii::getAlias('@web') .  '/web/images/upload/sampul/' . $model->sampul);
-        unlink(Yii::getAlias('@web') .  '/web/images/upload/berkas/' . $model->berkas);
+        $sampul_lama = $model->sampul;
+        $berkas_lama = $model->berkas;
 
-        $model->delete();
+        if ($model->delete())
+        {
+           unlink('../web/images/upload/sampul/'.$sampul_lama);
+           unlink('../web/images/upload/berkas/'.$berkas_lama);
+        }
+
         return $this->redirect(['index']);
     }
 

@@ -45,7 +45,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['role', 'username', 'password', 'nama'], 'required'],
+            [['role', 'username', 'password'], 'required'],
             [['role'], 'integer'],
             [['kode_pegawai'], 'string', 'max' => 50],
             [['kode_pegawai'], 'default', 'value' => null],
