@@ -11,7 +11,7 @@ use app\models\Kategori;
 
 <div class="card card-default">
     <div class="card-header">
-        <h3 class="card-title">Rekap</h3>
+        <h2 class="card-title"><b>Rekap</b></h3>
     </div>
     <div class="card-body">
         <div class="row">

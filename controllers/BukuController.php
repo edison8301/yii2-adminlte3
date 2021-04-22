@@ -15,6 +15,9 @@ use app\models\Penerbit;
 use app\models\Kategori;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
  * BukuController implements the CRUD actions for Buku model.
@@ -235,48 +238,37 @@ class BukuController extends Controller
 
     public function actionExcel()
     {
-        $searchModel = new BukuSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->mergeCells('A2:E2'); // merger blok a2 sampe e2
+        $sheet->setCellValue('A2','Daftar Buku');
+
+        $sheet->setCellValue('A4', 'No');
+        $sheet->setCellValue('B4', 'Judul');
+        $sheet->setCellValue('C4', 'Penulis');
+        $sheet->setCellValue('D4', 'Penerbit');
+        $sheet->setCellValue('E4', 'Kategori');
         
-        // Initalize the TBS instance
-        $OpenTBS = new \hscstudio\export\OpenTBS; // new instance of TBS
-        // Change with Your template kaka
-        $template = Yii::getAlias('@hscstudio/export').'/templates/opentbs/ms-excel.xlsx';
-        $OpenTBS->LoadTemplate($template); // Also merge some [onload] automatic fields (depends of the type of document).
-        $OpenTBS->VarRef['modelName']= "Buku";               
-        $data = [];
-        $no=1;
-        foreach($dataProvider->getModels() as $buku){
-            $data[] = [
-                'no'=>$no++,
-                'nama'=>$buku->nama,
-                'tahun_terbit'=>$buku->tahun_terbit,
-                'id_penulis' =>$buku->penulis->nama,
-                'id_penerbit' =>$buku->penerbit->nama,
-                'id_kategori' =>$buku->kategori->nama,
-            ];
+        $row = 4;
+        $i = 1;
+
+        $models = new Buku();
+        foreach ($models->find()->all() as $data) 
+        {
+            $row++;
+            $sheet->setCellValue('A' . $row, $i);
+            $sheet->setCellValue('B' . $row, $data->nama);
+            $sheet->setCellValue('C' . $row, $data->kategori->nama);
+            $sheet->setCellValue('D' . $row, $data->penulis->nama);
+            $sheet->setCellValue('E' . $row, $data->penerbit->nama);
+
+            $i++;
         }
-        
-        $data2[0] = [
-                'no'=>'A',
-                'nama'=>'B',
-                'tahun_terbit'=>'C',
-                'id_penulis' => 'D',
-                'id_penerbit' => 'E',
-                'id_kategori' => 'F',
-            ];
-        $data2[1] = [
-                'no'=>'A',
-                'nama'=>'B',
-                'tahun_terbit'=>'C',
-                'id_penulis' => 'D',
-                'id_penerbit' => 'E',
-                'id_kategori' => 'F',
-            ];
-        $OpenTBS->MergeBlock('data', $data);
-        $OpenTBS->MergeBlock('data2', $data2);
-        // Output the result as a file on the server. You can change output file
-        $OpenTBS->Show(OPENTBS_DOWNLOAD, 'Buku.xlsx'); // Also merges all [onshow] automatic fields.          
-        exit;
+        $path = "exports/excel/";
+        $filename = "Daftar Buku - ".date('YmdHis').'.xlsx';
+        $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
+        $writer->save($path.$filename);
+        return Yii::$app->getResponse()->redirect($path.$filename);
     } 
 }

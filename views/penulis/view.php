@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="card card-default">
         <div class="card-header">
-            <?= Html::a('Back', ['buku/index', 'id' => $model->id], ['class' => 'btn btn-warning']) 
+            <?= Html::a('Back', ['penulis/index', 'id' => $model->id], ['class' => 'btn btn-warning']) 
             ?>
             <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
             <?= Html::a('Delete', ['delete', 'id' => $model->id], 
@@ -49,6 +49,40 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 ]) 
             ?>
+        </div>
+
+        <div class="card-body">
+            <h5>Daftar Buku Penulis <?= $model->nama; ?></h5>
+            <table class="table">
+            <tr>
+                <th>No</th>
+                <th>Nama Buku</th>
+                <th>Tahun Terbit</th>
+                <th>Penerbit</th>
+                <th>Kategori</th>
+                <th>&nbsp;</th>
+            </tr>
+            <?php $no=1; foreach ($model->listBuku() as $buku): ?>
+            <tr>
+                <td><?= $no; ?></td>
+                <td><?= $buku->nama;  ?></td>
+                <td><?= $buku->tahun_terbit; ?></td>
+                <td><?= @$buku->penerbit->nama ?></td>
+                <td><?= @$buku->kategori->nama ?></td>
+                <td>
+                    <!-- <?= Html::a("Lihat", ["buku/view", "id" => $buku->id ])?> -->
+                    <?= Html::a("<i class='fa fa-pencil-alt'></i>", ["buku/update", "id" => $buku->id])?>
+                    <?= Html::a("<i class='fa fa-trash'></i>", ["buku/delete", "id" => $buku->id], 
+                        [
+                        'data' => [
+                            'method' => 'post',
+                            'confirm' => 'Apakah anda yakin akan menghapus nya?'
+                        ]
+                    ])?>
+                </td>
+            </tr>
+            <?php $no++; endforeach ?>
+            </table>         
         </div>
     </div>
 </div>

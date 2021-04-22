@@ -17,7 +17,7 @@ use app\models\User;
 
 <div class="card card-default">
     <div class="card-header">
-        <h3 class="card-title">Grafik</h3>
+        <h2 class="card-title"><b>Grafik</b></h3>
     </div>
     <div class="card-body">
         <div class="row">

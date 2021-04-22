@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     
         <div class="card-body">
-            <div class="columns">
+            
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,

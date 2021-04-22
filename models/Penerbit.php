@@ -86,4 +86,16 @@ class Penerbit extends \yii\db\ActiveRecord
         }
         return $data;
     }
+
+    public static function getList() 
+    {
+        return \yii\helpers\ArrayHelper::map(self::find()->all(), 'id','nama');
+    }
+
+    public function listBuku()
+    {
+        return Buku::find()
+            ->andWhere(['id_kategori' => $this->id])
+            ->all();
+    }
 }

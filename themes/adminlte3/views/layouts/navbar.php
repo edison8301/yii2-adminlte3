@@ -17,7 +17,7 @@ use yii\helpers\Html;
         </li>
     </ul>
 
-    <h1 class="">Perpustakaan</h1>
+    <h2 class="text"><b>Perpustakaan</b></h2>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">

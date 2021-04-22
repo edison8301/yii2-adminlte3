@@ -115,4 +115,9 @@ class Buku extends \yii\db\ActiveRecord
         
         return '<i class="fa fa-remove" data-toggle="tooltip" title="Berkas Tidak Tersedia"></i>';   
     }
+
+    public static function getList() 
+    {
+        return \yii\helpers\ArrayHelper::map(self::find()->all(), 'id','nama');
+    }
 }
