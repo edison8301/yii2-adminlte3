@@ -96,7 +96,7 @@ class Penulis extends \yii\db\ActiveRecord
     public function listBuku()
     {
         return Buku::find()
-            ->andWhere(['id_kategori' => $this->id])
+            ->andWhere(['id_penulis' => $this->id])
             ->all();
     }
 }

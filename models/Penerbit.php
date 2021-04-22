@@ -95,7 +95,7 @@ class Penerbit extends \yii\db\ActiveRecord
     public function listBuku()
     {
         return Buku::find()
-            ->andWhere(['id_kategori' => $this->id])
+            ->andWhere(['id_penerbit' => $this->id])
             ->all();
     }
 }
